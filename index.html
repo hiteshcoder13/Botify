@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+   <style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1d1f21, #31363b);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #4a4e52;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.gif-container {
+    position: relative;
+    display: inline-block;
+}
+
+#listening-indicator {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 1em;
+    display: none;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mic-button {
+    background: #e91e63;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.mic-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.mic-button:hover {
+    background: #d81b60;
+}
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">B O T I F Y</div>
+        <div class="subtitle">I'm a Virtual Assistant BOTIFY, How may I help you?</div>
+        <div class="gif-container">
+            <div id="listening-indicator" class="listening-indicator">Listening...</div>
+            <img src="https://i.giphy.com/7x3PHPSMXSONHFuOK4.webp" alt="Voice Assistant GIF">
+            <div class="overlay"></div>
+            <button id="microphone-btn" class="mic-button">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Microphone Icon">
+            </button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('microphone-btn').addEventListener('click', function() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            document.getElementById('listening-indicator').style.display = 'block';
+
+            recognition.onresult = function(event) {
+                const command = event.results[0][0].transcript.toLowerCase();
+                if (command.includes('google')) {
+                    window.location.href = 'https://www.google.com';
+                } else if (command.includes('youtube')) {
+                    window.location.href = 'https://www.youtube.com';
+                } else if (command.includes('facebook')) {
+                    window.location.href = 'https://www.facebook.com';
+                } else if (command.includes('free fire')) {
+                    window.location.href = 'https://play.google.com/store/apps/details?id=com.dts.freefiremax&hl=en_IN';
+                } else if (command.includes('gmail')) {
+                    window.location.href = 'https://mail.google.com/mail/u/0/#inbox';
+                } else if (command.includes('whatsapp')) {
+                    window.location.href = 'https://web.whatsapp.com/';
+                } 
+                
+                else if (command.includes('amazon')) {
+                    window.location.href = 'https://amazon.com/'
+                } 
+                else if (command.includes('flipkart')) {
+                    window.location.href = 'https://flipkart.com/'
+                } 
+                else if (command.includes('meesho')) {
+                    window.location.href = 'https://meesho.com/'
+                } 
+                else if (command.includes('snapdeal')) {
+                    window.location.href = 'https://snapdeal.com/'
+                }
+                else if (command.includes('paytm')) {
+                    window.location.href = 'https://paytm.com/'
+                }
+else if(command.includes('linkedin')){
+    window.location.href = 'https://www.linkedin.com/'
+}
+                else if (command.includes('instagram')) {
+                    window.location.href = 'https://www.instagram.com/'
+                }
+                else if (command.includes('twitter')) {
+                    window.location.href = 'https://twitter.com/'
+                }
+                else if (command.includes('github')) {
+                    window.location.href = 'https://github.com/'
+                }
+                else if (command.includes('stackoverflow')) {
+                    window.location.href = 'https://stackoverflow.com/'
+                }
+                else if(command.includes('chatgpt'||'chat gpt')){
+                    window.location.href = 'https://chat.openai.com/'
+                }
+                else if (command.includes('wikipedia')) {
+                    window.location.href = 'https://en.wikipedia.org/wiki/Main_Page'
+                }
+                else if(command.includes('snapchat')) {
+                    window.location.href = 'https://www.snapchat.com/'
+                }
+                else if (command.includes('telegram')) {
+                    window.location.href = 'https://www.telegram.com/'
+                }
+                else if (command.includes('discord')) {
+                    window.location.href = 'https://discord.com/'
+                }
+                
+               else {
+                    window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(command);
+                }
+            };
+
+            recognition.onerror = function(event) {
+                alert('Error occurred in recognition: ' + event.error);
+            };
+
+            recognition.onend = function() {
+                document.getElementById('listening-indicator').style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html>
